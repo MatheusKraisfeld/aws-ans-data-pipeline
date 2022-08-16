@@ -1,0 +1,20 @@
+{
+    "Statement": [{
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+        },
+      "Action": [
+            "SNS:Subscribe",
+			"SNS:SetTopicAttributes",
+			"SNS:RemovePermission",
+			"SNS:Receive",
+			"SNS:Publish",
+			"SNS:ListSubscriptionsByTopic",
+			"SNS:GetTopicAttributes",
+			"SNS:DeleteTopic",
+			"SNS:AddPermission",
+        ],
+      "Resource": "arn:aws:sns:us-east-1:741358071637:glue_job*"
+    }]
+  }

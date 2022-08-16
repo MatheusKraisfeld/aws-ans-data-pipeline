@@ -72,3 +72,13 @@ variable "glue_scripts_max_capacity" {
   type        = list(number)
   default     = [2, 2]
 }
+
+variable "sns_name" {
+  description = "Name of the SNS topic"
+  default     = "glue_job_ends_sns"
+}
+
+variable "glue_job_sqs_name" {
+  description = "Name of the SQS queue"
+  default     = "glue_job_ends_queue"
+}

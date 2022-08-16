@@ -11,6 +11,7 @@ from pyspark.context import SparkContext
 glueContext = GlueContext(SparkContext.getOrCreate())
 spark = glueContext.spark_session
 
+import logging
 import os
 import shutil
 import urllib.request as request
@@ -21,6 +22,8 @@ import boto3
 import botocore
 import botocore.vendored.requests.packages.urllib3 as urllib3
 
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 s3 = boto3.resource("s3")
 s3C = boto3.client("s3")
 
@@ -157,8 +160,10 @@ def all_ans_info_cons_ben_2parquet(years, months, ufs):
                         print(e)
 
 
-all_ans_info_cons_ben_2parquet(
-    range(2014, 2015),
-    range(1, 13),
-    ["MG"],
-)
+# all_ans_info_cons_ben_2parquet(
+#     range(2015, 2016),
+#     range(1, 13),
+#     ["MG"],
+# )
+
+logger.info("Finished")

@@ -11,6 +11,7 @@ from pyspark.context import SparkContext
 glueContext = GlueContext(SparkContext.getOrCreate())
 spark = glueContext.spark_session
 
+import logging
 import os
 import shutil
 import urllib.request as request
@@ -21,6 +22,8 @@ import boto3
 import botocore
 import botocore.vendored.requests.packages.urllib3 as urllib3
 import pyspark.sql.functions as F
+from pyspark.sql.column import Column
+from pyspark.sql.dataframe import DataFrame
 from pyspark.sql.types import (
     ArrayType,
     DateType,
@@ -31,6 +34,8 @@ from pyspark.sql.types import (
 )
 from unidecode import unidecode
 
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 s3 = boto3.resource("s3")
 s3C = boto3.client("s3")
 client = boto3.client("sts")
@@ -139,6 +144,7 @@ def cleaner() -> None:
     ).parquet(f"{S3_BUCKET_CLEANED}/{PARQUET_PATH}")
 
 
-cleaner()
+# cleaner()
+logger.info("Job done!")
 
 ### END ###

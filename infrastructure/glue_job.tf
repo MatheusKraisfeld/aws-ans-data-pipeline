@@ -3,7 +3,7 @@ resource "aws_glue_job" "glue_job" {
   name         = var.glue_scripts[count.index]
   role_arn     = aws_iam_role.glue_job_role.arn
   max_capacity = var.glue_scripts_max_capacity[count.index]
-  glue_version = "2.0"
+  glue_version = "3.0"
   command {
     script_location = "s3://ans-data-pipeline-resources-741358071637/.glue_scripts/${var.glue_scripts[count.index]}.py"
     python_version  = "3"
@@ -19,7 +19,7 @@ resource "aws_glue_job" "glue_job" {
 
 resource "aws_glue_trigger" "ans_crawler_info_cons_ben" {
   name     = "ans_crawler_info_cons_ben"
-  schedule = "cron(2 1 16 * ? *)"
+  schedule = "cron(24 16 16 * ? *)" # UTC Timezone
   type     = "SCHEDULED"
 
   actions {
@@ -48,7 +48,7 @@ resource "aws_glue_trigger" "ans_cleaner_info_cons_ben_crawler" {
   type = "CONDITIONAL"
 
   actions {
-    crawler_name = var.glue_scripts[1] # ans_cleaner_info_cons_ben
+    crawler_name = aws_glue_crawler.cleaned_info_cons_ben.name
   }
 
   predicate {

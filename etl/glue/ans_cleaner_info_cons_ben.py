@@ -23,6 +23,7 @@ import botocore
 import botocore.vendored.requests.packages.urllib3 as urllib3
 import pyspark.sql.functions as F
 from pyspark.sql.column import Column
+from pyspark.sql.dataframe import DataFrame
 from pyspark.sql.types import (
     ArrayType,
     DateType,
@@ -143,6 +144,7 @@ def cleaner() -> None:
     ).parquet(f"{S3_BUCKET_CLEANED}/{PARQUET_PATH}")
 
 
-cleaner()
+# cleaner()
+logger.info("Job done!")
 
 ### END ###

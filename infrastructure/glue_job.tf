@@ -19,7 +19,7 @@ resource "aws_glue_job" "glue_job" {
 
 resource "aws_glue_trigger" "ans_crawler_info_cons_ben" {
   name     = "ans_crawler_info_cons_ben"
-  schedule = "cron(30 21 15 * ? *)"
+  schedule = "cron(2 1 16 * ? *)"
   type     = "SCHEDULED"
 
   actions {
